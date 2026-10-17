@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brew &amp; Bliss — Coffee House | Brew Your Perfect Moment</title>
+  <meta name="description" content="Brew & Bliss Coffee House — premium artisan coffee, cozy ambiance and freshly baked desserts. Order online or book a table today." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Brew & Bliss — Coffee House" />
+  <meta property="og:description" content="Brew Your Perfect Moment. Premium artisan coffee, cozy ambiance, freshly baked desserts." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1200&q=80" />
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>☕</text></svg>" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS (Play CDN) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            espresso: '#150D08',
+            mocha:    '#1E140D',
+            bean:     '#2A1C12',
+            caramel:  '#C8963E',
+            gold:     '#E7B85C',
+            cream:    '#F4E7D3',
+            foam:     '#FBF6EE',
+          },
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            sans:    ['Inter', 'system-ui', 'sans-serif'],
+          },
+          boxShadow: {
+            glow: '0 0 60px -15px rgba(231, 184, 92, 0.45)',
+            card: '0 20px 45px -20px rgba(0,0,0,0.75)',
+          },
+        },
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body class="bg-espresso text-cream font-sans antialiased overflow-x-hidden">
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
+    <nav class="max-w-7xl mx-auto flex items-center justify-between px-5 sm:px-8 py-4">
+      <a href="#home" class="flex items-center gap-2 group">
+        <span class="grid place-items-center h-10 w-10 rounded-full bg-gradient-to-br from-gold to-caramel text-espresso text-xl shadow-glow transition-transform duration-300 group-hover:rotate-12">☕</span>
+        <span class="font-display text-xl sm:text-2xl font-bold tracking-wide">
+          Brew <span class="text-gold">&amp;</span> Bliss
+        </span>
+      </a>
+
+      <ul class="hidden lg:flex items-center gap-8 text-sm font-medium text-cream/80">
+        <li><a class="nav-link" href="#about">About</a></li>
+        <li><a class="nav-link" href="#menu">Menu</a></li>
+        <li><a class="nav-link" href="#why">Why Us</a></li>
+        <li><a class="nav-link" href="#testimonials">Reviews</a></li>
+        <li><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+
+      <div class="flex items-center gap-3">
+        <!-- Cart button -->
+        <button id="cartBtn" class="relative flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-sm font-semibold text-gold hover:bg-gold hover:text-espresso transition-all duration-300" aria-label="Open cart">
+          <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"/></svg>
+          <span class="hidden sm:inline">Cart</span>
+          <span id="cartCount" class="absolute -top-2 -right-2 grid place-items-center h-5 min-w-[1.25rem] px-1 rounded-full bg-caramel text-espresso text-[11px] font-bold scale-0 transition-transform duration-300">0</span>
+        </button>
+
+        <!-- Mobile menu toggle -->
+        <button id="menuToggle" class="lg:hidden grid place-items-center h-10 w-10 rounded-full border border-cream/15 text-cream hover:border-gold hover:text-gold transition" aria-label="Toggle menu">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <div id="mobileMenu" class="lg:hidden hidden mx-4 mb-3 rounded-2xl border border-cream/10 bg-mocha/95 backdrop-blur-xl p-5 shadow-card">
+      <ul class="flex flex-col gap-4 text-cream/85 font-medium">
+        <li><a class="mobile-link block hover:text-gold transition" href="#about">About</a></li>
+        <li><a class="mobile-link block hover:text-gold transition" href="#menu">Menu</a></li>
+        <li><a class="mobile-link block hover:text-gold transition" href="#why">Why Us</a></li>
+        <li><a class="mobile-link block hover:text-gold transition" href="#testimonials">Reviews</a></li>
+        <li><a class="mobile-link block hover:text-gold transition" href="#contact">Contact</a></li>
+        <li><a class="mobile-link block rounded-full bg-gold text-espresso text-center py-2.5 font-semibold" href="#booking">Book a Table</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===================== CART DRAWER ===================== -->
+  <div id="cartOverlay" class="fixed inset-0 z-[60] bg-black/70 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"></div>
+  <aside id="cartDrawer" class="fixed top-0 right-0 z-[70] h-full w-full max-w-md bg-mocha border-l border-gold/20 shadow-card translate-x-full transition-transform duration-400 flex flex-col">
+    <div class="flex items-center justify-between px-6 py-5 border-b border-cream/10">
+      <h3 class="font-display text-2xl font-bold">Your <span class="text-gold">Cart</span></h3>
+      <button id="cartClose" class="h-9 w-9 grid place-items-center rounded-full border border-cream/15 hover:border-gold hover:text-gold transition" aria-label="Close cart">✕</button>
+    </div>
+
+    <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-5 space-y-4">
+      <!-- injected -->
+    </div>
+
+    <div class="border-t border-cream/10 px-6 py-5 space-y-4 bg-bean/60">
+      <div class="flex items-center justify-between text-lg">
+        <span class="text-cream/70">Subtotal</span>
+        <span id="cartTotal" class="font-display text-2xl font-bold text-gold">$0.00</span>
+      </div>
+      <button id="checkoutBtn" class="w-full rounded-full bg-gradient-to-r from-gold to-caramel py-3.5 font-semibold text-espresso hover:shadow-glow hover:brightness-110 active:scale-[.98] transition-all duration-300">
+        Checkout
+      </button>
+      <p class="text-center text-xs text-cream/45">Free delivery on orders over $25 ☕</p>
+    </div>
+  </aside>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[80] rounded-full bg-gold px-6 py-3 text-sm font-semibold text-espresso shadow-glow opacity-0 translate-y-4 pointer-events-none transition-all duration-300"></div>
+
+  <main>
+    <!-- ===================== HERO ===================== -->
+    <section id="home" class="relative min-h-screen flex items-center pt-28 pb-20 overflow-hidden">
+      <!-- Background -->
+      <div class="absolute inset-0 -z-10">
+        <img src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?auto=format&fit=crop&w=1920&q=80"
+             alt="Freshly brewed coffee" class="h-full w-full object-cover" loading="eager" />
+        <div class="absolute inset-0 bg-gradient-to-r from-espresso via-espresso/90 to-espresso/40"></div>
+        <div class="absolute inset-0 bg-gradient-to-t from-espresso via-transparent to-espresso/60"></div>
+      </div>
+      <!-- Floating beans -->
+      <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <span class="bean float-a">☕</span>
+        <span class="bean float-b">✦</span>
+        <span class="bean float-c">☕</span>
+      </div>
+
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 items-center w-full">
+        <div class="reveal">
+          <p class="inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-1.5 text-xs sm:text-sm font-semibold tracking-[0.2em] uppercase text-gold">
+            <span class="h-1.5 w-1.5 rounded-full bg-gold animate-pulse"></span> Artisan Coffee House
+          </p>
+
+          <h1 class="mt-6 font-display font-extrabold leading-[1.05] text-4xl sm:text-6xl xl:text-7xl">
+            Brew Your<br />
+            Perfect <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold via-caramel to-gold animate-shine">Moment</span>
+          </h1>
+
+          <p class="mt-6 max-w-xl text-base sm:text-lg text-cream/70 leading-relaxed">
+            Hand-roasted single-origin beans, master baristas and a cozy corner made for you.
+            Every cup at <span class="text-gold font-medium">Brew &amp; Bliss</span> is a small ritual worth slowing down for.
+          </p>
+
+          <div class="mt-9 flex flex-wrap gap-4">
+            <a href="#menu" class="group relative overflow-hidden rounded-full bg-gradient-to-r from-gold to-caramel px-8 py-4 font-semibold text-espresso shadow-glow transition-all duration-300 hover:-translate-y-0.5 hover:brightness-110">
+              <span class="relative z-10">Order Now</span>
+              <span class="absolute inset-0 -translate-x-full bg-white/30 transition-transform duration-500 group-hover:translate-x-full"></span>
+            </a>
+            <a href="#booking" class="rounded-full border border-cream/30 px-8 py-4 font-semibold text-cream hover:border-gold hover:text-gold hover:bg-gold/10 transition-all duration-300 hover:-translate-y-0.5">
+              Book a Table
+            </a>
+          </div>
+
+          <div class="mt-12 flex flex-wrap items-center gap-8 sm:gap-10">
+            <div>
+              <p class="font-display text-3xl font-bold text-gold">12+</p>
+              <p class="text-sm text-cream/60">Years of roasting</p>
+            </div>
+            <div class="h-10 w-px bg-cream/15"></div>
+            <div>
+              <p class="font-display text-3xl font-bold text-gold">30k+</p>
+              <p class="text-sm text-cream/60">Happy cups served</p>
+            </div>
+            <div class="h-10 w-px bg-cream/15"></div>
+            <div>
+              <p class="font-display text-3xl font-bold text-gold">4.9★</p>
+              <p class="text-sm text-cream/60">Customer rating</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hero image card -->
+        <div class="reveal relative hidden lg:block" style="transition-delay:.2s">
+          <div class="relative rounded-[2rem] overflow-hidden border border-gold/25 shadow-card float-slow">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1000&q=80"
+                 alt="Cappuccino with latte art" class="h-[520px] w-full object-cover" loading="eager" />
+            <div class="absolute inset-0 bg-gradient-to-t from-espresso/80 via-transparent to-transparent"></div>
+          </div>
+          <div class="absolute -bottom-6 -left-6 rounded-2xl border border-gold/30 bg-mocha/90 backdrop-blur px-6 py-4 shadow-card">
+            <p class="text-xs uppercase tracking-widest text-gold">Today's special</p>
+            <p class="font-display text-xl font-bold">Golden Caramel Latte</p>
+            <p class="text-gold font-semibold">$4.50</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll cue -->
+      <a href="#about" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-cream/50 hover:text-gold transition hidden sm:flex flex-col items-center gap-2 text-xs tracking-widest uppercase">
+        Scroll
+        <span class="animate-bounce">↓</span>
+      </a>
+    </section>
+
+    <!-- ===================== ABOUT ===================== -->
+    <section id="about" class="relative py-24 sm:py-32 bg-mocha">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-14 items-center">
+        <div class="reveal relative">
+          <div class="grid grid-cols-2 gap-4">
+            <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=700&q=80"
+                 alt="Barista pouring latte art" class="rounded-2xl h-64 sm:h-80 w-full object-cover border border-gold/15 hover:scale-[1.03] transition-transform duration-500" loading="lazy" />
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=700&q=80"
+                 alt="Coffee beans" class="rounded-2xl mt-10 h-64 sm:h-80 w-full object-cover border border-gold/15 hover:scale-[1.03] transition-transform duration-500" loading="lazy" />
+          </div>
+          <div class="absolute -bottom-7 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-br from-gold to-caramel px-7 py-5 text-center text-espresso shadow-glow">
+            <p class="font-display text-3xl font-extrabold leading-none">2013</p>
+            <p class="text-[11px] font-semibold uppercase tracking-wider">Since</p>
+          </div>
+        </div>
+
+        <div class="reveal" style="transition-delay:.15s">
+          <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-gold">Our Story</p>
+          <h2 class="mt-4 font-display text-3xl sm:text-5xl font-bold leading-tight">
+            A little house built on <span class="text-gold">big flavor</span>
+          </h2>
+          <p class="mt-6 text-cream/70 leading-relaxed">
+            Brew &amp; Bliss began in 2013 with a second-hand roaster, one stubborn espresso machine and a
+            simple belief: great coffee should feel like a warm hug. We source our beans directly from
+            smallholder farms in Ethiopia, Colombia and Sumatra — roasted in tiny batches every morning
+            before the sun is fully up.
+          </p>
+          <p class="mt-4 text-cream/70 leading-relaxed">
+            Today, our cozy corner barista team serves more than 300 cups a day, remembers your order,
+            and still treats every cup like it's the first one we ever made.
+          </p>
+
+          <ul class="mt-8 grid sm:grid-cols-2 gap-4">
+            <li class="flex items-start gap-3 rounded-xl border border-cream/10 bg-bean/50 p-4 hover:border-gold/40 transition">
+              <span class="text-gold text-xl">✓</span>
+              <div><p class="font-semibold">Single-origin beans</p><p class="text-sm text-cream/60">Ethically sourced, fairly traded</p></div>
+            </li>
+            <li class="flex items-start gap-3 rounded-xl border border-cream/10 bg-bean/50 p-4 hover:border-gold/40 transition">
+              <span class="text-gold text-xl">✓</span>
+              <div><p class="font-semibold">Roasted daily</p><p class="text-sm text-cream/60">Small-batch, never stale</p></div>
+            </li>
+            <li class="flex items-start gap-3 rounded-xl border border-cream/10 bg-bean/50 p-4 hover:border-gold/40 transition">
+              <span class="text-gold text-xl">✓</span>
+              <div><p class="font-semibold">Homemade bakes</p><p class="text-sm text-cream/60">Croissants out of the oven at 7am</p></div>
+            </li>
+            <li class="flex items-start gap-3 rounded-xl border border-cream/10 bg-bean/50 p-4 hover:border-gold/40 transition">
+              <span class="text-gold text-xl">✓</span>
+              <div><p class="font-semibold">Barista champions</p><p class="text-sm text-cream/60">Three regional latte-art winners</p></div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== MENU ===================== -->
+    <section id="menu" class="relative py-24 sm:py-32">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="reveal text-center max-w-2xl mx-auto">
+          <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-gold">Our Menu</p>
+          <h2 class="mt-4 font-display text-3xl sm:text-5xl font-bold">Crafted with <span class="text-gold">passion</span></h2>
+          <p class="mt-4 text-cream/65">Filter by category, tap <span class="text-gold font-semibold">Add</span> and your picks land in the cart.</p>
+        </div>
+
+        <!-- Category filter -->
+        <div class="reveal mt-10 flex flex-wrap justify-center gap-3" id="filterBar" role="tablist" aria-label="Menu categories">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="hot">Hot Coffee</button>
+          <button class="filter-btn" data-filter="cold">Cold Coffee</button>
+          <button class="filter-btn" data-filter="dessert">Dessert</button>
+        </div>
+
+        <!-- Items -->
+        <div id="menuGrid" class="mt-12 grid gap-7 sm:grid-cols-2 lg:grid-cols-3"></div>
+
+        <p id="menuEmpty" class="hidden text-center text-cream/60 mt-10">No items in this category yet — try another one ☕</p>
+      </div>
+    </section>
+
+    <!-- ===================== WHY CHOOSE US ===================== -->
+    <section id="why" class="relative py-24 sm:py-32 bg-mocha overflow-hidden">
+      <div class="absolute -top-24 -right-24 h-72 w-72 rounded-full bg-gold/10 blur-3xl"></div>
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="reveal text-center max-w-2xl mx-auto">
+          <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-gold">Why Choose Us</p>
+          <h2 class="mt-4 font-display text-3xl sm:text-5xl font-bold">The Brew &amp; Bliss <span class="text-gold">difference</span></h2>
+        </div>
+
+        <div class="mt-14 grid gap-7 md:grid-cols-3">
+          <article class="reveal group relative rounded-3xl border border-cream/10 bg-bean/60 p-8 text-center hover:-translate-y-2 hover:border-gold/50 hover:shadow-card transition-all duration-500">
+            <div class="mx-auto grid place-items-center h-20 w-20 rounded-2xl bg-gradient-to-br from-gold/20 to-transparent border border-gold/30 text-4xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">🫘</div>
+            <h3 class="mt-6 font-display text-2xl font-bold">Premium Beans</h3>
+            <p class="mt-3 text-cream/65 leading-relaxed">100% Arabica, hand-picked at altitude and roasted in small batches every single morning.</p>
+            <span class="absolute top-6 right-7 font-display text-5xl font-bold text-cream/5 group-hover:text-gold/15 transition">01</span>
+          </article>
+
+          <article class="reveal group relative rounded-3xl border border-cream/10 bg-bean/60 p-8 text-center hover:-translate-y-2 hover:border-gold/50 hover:shadow-card transition-all duration-500" style="transition-delay:.12s">
+            <div class="mx-auto grid place-items-center h-20 w-20 rounded-2xl bg-gradient-to-br from-gold/20 to-transparent border border-gold/30 text-4xl transition-transform duration-500 group-hover:scale-110 group-hover:-rotate-6">⚡</div>
+            <h3 class="mt-6 font-display text-2xl font-bold">Fast Service</h3>
+            <p class="mt-3 text-cream/65 leading-relaxed">Your favorite cup ready in under 4 minutes — order ahead and skip the line entirely.</p>
+            <span class="absolute top-6 right-7 font-display text-5xl font-bold text-cream/5 group-hover:text-gold/15 transition">02</span>
+          </article>
+
+          <article class="reveal group relative rounded-3xl border border-cream/10 bg-bean/60 p-8 text-center hover:-translate-y-2 hover:border-gold/50 hover:shadow-card transition-all duration-500" style="transition-delay:.24s">
+            <div class="mx-auto grid place-items-center h-20 w-20 rounded-2xl bg-gradient-to-br from-gold/20 to-transparent border border-gold/30 text-4xl transition-transform duration-500 group-hover:scale-110 group-hover:rotate-6">🕯️</div>
+            <h3 class="mt-6 font-display text-2xl font-bold">Cozy Ambiance</h3>
+            <p class="mt-3 text-cream/65 leading-relaxed">Warm lighting, soft vinyl playlists and plush corners — stay for hours, we won't rush you.</p>
+            <span class="absolute top-6 right-7 font-display text-5xl font-bold text-cream/5 group-hover:text-gold/15 transition">03</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== BOOKING ===================== -->
+    <section id="booking" class="relative py-24 sm:py-32">
+      <div class="max-w-6xl mx-auto px-5 sm:px-8">
+        <div class="reveal relative overflow-hidden rounded-[2rem] border border-gold/25 bg-gradient-to-br from-bean via-mocha to-bean shadow-card">
+          <!-- bg image -->
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1400&q=80"
+               alt="Cozy cafe interior" class="absolute inset-0 h-full w-full object-cover opacity-15" loading="lazy" />
+
+          <div class="relative grid lg:grid-cols-2 gap-10 p-7 sm:p-12">
+            <div>
+              <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-gold">Reservations</p>
+              <h2 class="mt-4 font-display text-3xl sm:text-4xl font-bold leading-tight">Book your <span class="text-gold">perfect corner</span></h2>
+              <p class="mt-4 text-cream/70">Reserve a table for up to 12 guests. We'll confirm by phone within 15 minutes.</p>
+
+              <ul class="mt-8 space-y-4 text-sm">
+                <li class="flex items-center gap-3"><span class="grid place-items-center h-9 w-9 rounded-full bg-gold/15 text-gold">📍</span> 24 Roastery Lane, Downtown District</li>
+                <li class="flex items-center gap-3"><span class="grid place-items-center h-9 w-9 rounded-full bg-gold/15 text-gold">📞</span> +1 (555) 018-2245</li>
+                <li class="flex items-center gap-3"><span class="grid place-items-center h-9 w-9 rounded-full bg-gold/15 text-gold">🕖</span> Open daily 7:00 AM – 11:00 PM</li>
+              </ul>
+            </div>
+
+            <form id="bookingForm" novalidate class="rounded-2xl border border-cream/10 bg-espresso/70 backdrop-blur p-6 sm:p-7 space-y-4">
+              <div>
+                <label class="form-label" for="bkName">Full Name</label>
+                <input id="bkName" name="name" type="text" placeholder="Jane Doe" class="form-input" autocomplete="name" />
+                <p class="form-error" data-error-for="bkName"></p>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="form-label" for="bkPhone">Phone</label>
+                  <input id="bkPhone" name="phone" type="tel" placeholder="+1 555 000 1234" class="form-input" autocomplete="tel" />
+                  <p class="form-error" data-error-for="bkPhone"></p>
+                </div>
+                <div>
+                  <label class="form-label" for="bkGuests">Guests</label>
+                  <select id="bkGuests" name="guests" class="form-input">
+                    <option value="">Select</option>
+                    <option>1</option><option>2</option><option>3</option><option>4</option>
+                    <option>5</option><option>6</option><option>7</option><option>8</option>
+                    <option>9</option><option>10</option><option>11</option><option>12</option>
+                  </select>
+                  <p class="form-error" data-error-for="bkGuests"></p>
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="form-label" for="bkDate">Date</label>
+                  <input id="bkDate" name="date" type="date" class="form-input" />
+                  <p class="form-error" data-error-for="bkDate"></p>
+                </div>
+                <div>
+                  <label class="form-label" for="bkTime">Time</label>
+                  <input id="bkTime" name="time" type="time" class="form-input" />
+                  <p class="form-error" data-error-for="bkTime"></p>
+                </div>
+              </div>
+
+              <button type="submit" class="w-full rounded-full bg-gradient-to-r from-gold to-caramel py-3.5 font-semibold text-espresso shadow-glow hover:brightness-110 hover:-translate-y-0.5 active:scale-[.98] transition-all duration-300">
+                Reserve My Table
+              </button>
+              <p id="bookingSuccess" class="hidden text-center text-sm font-medium text-gold">🎉 Table reserved! We'll call you shortly to confirm.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== TESTIMONIALS ===================== -->
+    <section id="testimonials" class="relative py-24 sm:py-32 bg-mocha">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="reveal text-center max-w-2xl mx-auto">
+          <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-gold">Testimonials</p>
+          <h2 class="mt-4 font-display text-3xl sm:text-5xl font-bold">Loved by our <span class="text-gold">regulars</span></h2>
+        </div>
+
+        <div class="mt-14 grid gap-7 md:grid-cols-3">
+          <figure class="reveal rounded-3xl border border-cream/10 bg-bean/60 p-7 hover:border-gold/40 hover:-translate-y-1.5 transition-all duration-500">
+            <div class="text-gold text-lg tracking-wider">★★★★★</div>
+            <blockquote class="mt-4 text-cream/75 leading-relaxed">“The caramel latte here ruined every other café for me. Cozy seats, fast service, and the baristas actually remember my name.”</blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80" alt="Sarah Mitchell" class="h-11 w-11 rounded-full object-cover border border-gold/40" loading="lazy" />
+              <div>
+                <p class="font-semibold">Sarah Mitchell</p>
+                <p class="text-xs text-cream/55">Regular since 2019</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal rounded-3xl border border-cream/10 bg-bean/60 p-7 hover:border-gold/40 hover:-translate-y-1.5 transition-all duration-500" style="transition-delay:.12s">
+            <div class="text-gold text-lg tracking-wider">★★★★★</div>
+            <blockquote class="mt-4 text-cream/75 leading-relaxed">“I work remotely three days a week from here. Great Wi-Fi, even better cold brew, and nobody rushes you out the door.”</blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80" alt="Daniel Ortega" class="h-11 w-11 rounded-full object-cover border border-gold/40" loading="lazy" />
+              <div>
+                <p class="font-semibold">Daniel Ortega</p>
+                <p class="text-xs text-cream/55">Freelance designer</p>
+              </div>
+            </figcaption>
+          </figure>
+
+          <figure class="reveal rounded-3xl border border-cream/10 bg-bean/60 p-7 hover:border-gold/40 hover:-translate-y-1.5 transition-all duration-500" style="transition-delay:.24s">
+            <div class="text-gold text-lg tracking-wider">★★★★★</div>
+            <blockquote class="mt-4 text-cream/75 leading-relaxed">“Booked a table for my mom's birthday and they had everything ready — croissants, flowers, the works. Absolute five-star care.”</blockquote>
+            <figcaption class="mt-6 flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=120&q=80" alt="Aisha Bennett" class="h-11 w-11 rounded-full object-cover border border-gold/40" loading="lazy" />
+              <div>
+                <p class="font-semibold">Aisha Bennett</p>
+                <p class="text-xs text-cream/55">Local guide</p>
+              </div>
+            </figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== CONTACT & FOOTER ===================== -->
+    <section id="contact" class="relative pt-24 sm:pt-32">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8">
+        <div class="reveal grid lg:grid-cols-2 gap-10 items-stretch">
+          <div>
+            <p class="text-xs sm:text-sm font-semibold uppercase tracking-[0.3em] text-gold">Visit Us</p>
+            <h2 class="mt-4 font-display text-3xl sm:text-5xl font-bold">Find your way to <span class="text-gold">bliss</span></h2>
+            <p class="mt-4 text-cream/70 max-w-lg">Right in the heart of downtown, two minutes from Central Station. Street parking available after 6 PM.</p>
+
+            <div class="mt-8 grid sm:grid-cols-2 gap-4">
+              <div class="rounded-2xl border border-cream/10 bg-bean/60 p-5 hover:border-gold/40 transition">
+                <p class="text-gold text-sm font-semibold uppercase tracking-wider mb-2">Opening Hours</p>
+                <ul class="space-y-1.5 text-sm text-cream/75">
+                  <li class="flex justify-between"><span>Mon – Thu</span><span class="text-cream">7:00 – 22:00</span></li>
+                  <li class="flex justify-between"><span>Fri – Sat</span><span class="text-cream">7:00 – 23:00</span></li>
+                  <li class="flex justify-between"><span>Sunday</span><span class="text-cream">8:00 – 21:00</span></li>
+                </ul>
+              </div>
+              <div class="rounded-2xl border border-cream/10 bg-bean/60 p-5 hover:border-gold/40 transition">
+                <p class="text-gold text-sm font-semibold uppercase tracking-wider mb-2">Contact</p>
+                <ul class="space-y-1.5 text-sm text-cream/75">
+                  <li>24 Roastery Lane, Downtown</li>
+                  <li>+1 (555) 018-2245</li>
+                  <li>hello@brewandbliss.coffee</li>
+                </ul>
+                <a href="https://instagram.com" target="_blank" rel="noopener"
+                   class="mt-4 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-gold/10 px-4 py-2 text-xs font-semibold text-gold hover:bg-gold hover:text-espresso transition">
+                  <svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                  @brewandbliss
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal rounded-3xl overflow-hidden border border-gold/25 shadow-card min-h-[340px]" style="transition-delay:.15s">
+            <iframe
+              title="Brew & Bliss location map"
+              src="https://www.google.com/maps?q=Central+Station&output=embed"
+              class="h-full w-full grayscale-[35%] contrast-110"
+              style="border:0; filter: sepia(.35) saturate(1.1);"
+              loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt-24 border-t border-cream/10 bg-mocha">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-14">
+      <div class="grid gap-10 md:grid-cols-4">
+        <div class="md:col-span-2">
+          <a href="#home" class="flex items-center gap-2 w-fit">
+            <span class="grid place-items-center h-10 w-10 rounded-full bg-gradient-to-br from-gold to-caramel text-espresso text-xl">☕</span>
+            <span class="font-display text-2xl font-bold">Brew <span class="text-gold">&amp;</span> Bliss</span>
+          </a>
+          <p class="mt-4 max-w-sm text-sm text-cream/60 leading-relaxed">
+            Premium coffee house serving hand-roasted single-origin espresso, seasonal cold brews and
+            fresh bakes since 2013. Brew your perfect moment.
+          </p>
+          <div class="mt-5 flex gap-3">
+            <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" class="social-btn">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" class="social-btn">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://tiktok.com" target="_blank" rel="noopener" aria-label="TikTok" class="social-btn">
+              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <p class="font-semibold text-gold uppercase tracking-wider text-sm">Explore</p>
+          <ul class="mt-4 space-y-2.5 text-sm text-cream/65">
+            <li><a href="#about" class="hover:text-gold transition">About Us</a></li>
+            <li><a href="#menu" class="hover:text-gold transition">Menu</a></li>
+            <li><a href="#booking" class="hover:text-gold transition">Book a Table</a></li>
+            <li><a href="#testimonials" class="hover:text-gold transition">Testimonials</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p class="font-semibold text-gold uppercase tracking-wider text-sm">Opening Hours</p>
+          <ul class="mt-4 space-y-2.5 text-sm text-cream/65">
+            <li>Mon – Thu: 7:00 – 22:00</li>
+            <li>Fri – Sat: 7:00 – 23:00</li>
+            <li>Sunday: 8:00 – 21:00</li>
+            <li class="text-gold">☕ Now brewing: 7am – 11pm</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t border-cream/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream/45">
+        <p>© <span id="year">2026</span> Brew &amp; Bliss Coffee House. All rights reserved.</p>
+        <p>Crafted with ☕ &amp; care</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
